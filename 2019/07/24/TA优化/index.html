@@ -94,17 +94,17 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="TA优化优化目标 优化到什么程度？多少数据下的优化，要达到什么目标  优化范围 检查和清算   校验、检查、清算三步分开  优化方向 redis就不要考虑  只有SQL优化   1 本身SQL优化（有风险）  风险程度不是太高，为什么呢？因为可以做对比啊。原有查询什么样修改后还保证一直就可以了。  2 数据库索引 3 SQL查询时间点（有风险）（可调整也可不调整）  有些查询是不是可以前置？（在不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/07/23/hello-world/index.html">
+<meta property="og:title" content="一棵树 Home">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/TA优化/index.html">
 <meta property="og:site_name" content="一棵树 Home">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="TA优化优化目标 优化到什么程度？多少数据下的优化，要达到什么目标  优化范围 检查和清算   校验、检查、清算三步分开  优化方向 redis就不要考虑  只有SQL优化   1 本身SQL优化（有风险）  风险程度不是太高，为什么呢？因为可以做对比啊。原有查询什么样修改后还保证一直就可以了。  2 数据库索引 3 SQL查询时间点（有风险）（可调整也可不调整）  有些查询是不是可以前置？（在不">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-23T11:56:19.606Z">
+<meta property="og:updated_time" content="2019-07-24T11:15:02.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="一棵树 Home">
+<meta name="twitter:description" content="TA优化优化目标 优化到什么程度？多少数据下的优化，要达到什么目标  优化范围 检查和清算   校验、检查、清算三步分开  优化方向 redis就不要考虑  只有SQL优化   1 本身SQL优化（有风险）  风险程度不是太高，为什么呢？因为可以做对比啊。原有查询什么样修改后还保证一直就可以了。  2 数据库索引 3 SQL查询时间点（有风险）（可调整也可不调整）  有些查询是不是可以前置？（在不">
 
 
 
@@ -112,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/07/23/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/TA优化/">
 
 
 
@@ -123,7 +123,7 @@
 </script>
 
   
-  <title>Hello World | 一棵树 Home</title>
+  <title> | 一棵树 Home</title>
   
 
 
@@ -286,7 +286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/TA优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="geyafei">
@@ -303,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World
+          <h1 class="post-title" itemprop="name headline">
 
               
             
@@ -329,10 +329,14 @@
                 
               
 
-              <time title="Erstellt: 2019-07-23 19:56:19" itemprop="dateCreated datePublished" datetime="2019-07-23T19:56:19+08:00">2019-07-23</time>
+              <time title="Erstellt: 2019-07-24 19:14:37 / Geändert am: 19:15:02" itemprop="dateCreated datePublished" datetime="2019-07-24T19:14:37+08:00">2019-07-24</time>
             </span>
           
 
+          
+            
+
+            
           
 
           
@@ -369,19 +373,37 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="TA优化"><a href="#TA优化" class="headerlink" title="TA优化"></a>TA优化</h1><h2 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h2><blockquote>
+<p>优化到什么程度？多少数据下的优化，要达到什么目标</p>
+</blockquote>
+<h2 id="优化范围"><a href="#优化范围" class="headerlink" title="优化范围"></a>优化范围</h2><ul>
+<li><del>检查和清算</del></li>
+</ul>
+<blockquote>
+<p>校验、检查、清算三步分开</p>
+</blockquote>
+<h2 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h2><ul>
+<li><p><del>redis就不要考虑</del></p>
+</li>
+<li><p>只有SQL优化</p>
+</li>
+</ul>
+<p>1 本身SQL优化（有风险）</p>
+<blockquote>
+<p>风险程度不是太高，为什么呢？因为可以做对比啊。原有查询什么样修改后还保证一直就可以了。</p>
+</blockquote>
+<p>2 数据库索引</p>
+<p>3 SQL查询时间点（有风险）（可调整也可不调整）</p>
+<blockquote>
+<p>有些查询是不是可以前置？（<strong>在不考虑缓存的情况下</strong>）</p>
+</blockquote>
+<blockquote>
+<p>eg:100W的申请同一个产品下，那么参数是不是是直接放到产品清算的上下文中去做。<strong>要考虑什么时候清除覆盖</strong></p>
+</blockquote>
+<p>4 提交</p>
+<blockquote>
+<p>之前数据处理和持久化代码层面上已经分开了，但是没有做到批量提交，这个是一个优化点。</p>
+</blockquote>
 
       
     </div>
@@ -416,15 +438,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/23/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/24/TA优化/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TA优化"><span class="nav-number">1.</span> <span class="nav-text">TA优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化目标"><span class="nav-number">1.1.</span> <span class="nav-text">优化目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化范围"><span class="nav-number">1.2.</span> <span class="nav-text">优化范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化方向"><span class="nav-number">1.3.</span> <span class="nav-text">优化方向</span></a></li></ol></li></ol></div>
             
 
           </div>
