@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>一棵树 Home</title>
+  
+  <subtitle>记录</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-07-27T07:38:52.824Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>geyafei</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TA优化</title>
+    <link href="http://yoursite.com/2019/07/27/TA%E4%BC%98%E5%8C%96/"/>
+    <id>http://yoursite.com/2019/07/27/TA优化/</id>
+    <published>2019-07-27T07:04:25.000Z</published>
+    <updated>2019-07-27T07:38:52.824Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;TA优化&quot;&gt;&lt;a href=&quot;#TA优化&quot; class=&quot;headerlink&quot; title=&quot;TA优化&quot;&gt;&lt;/a&gt;TA优化&lt;/h1&gt;&lt;h2 id=&quot;优化目标&quot;&gt;&lt;a href=&quot;#优化目标&quot; class=&quot;headerlink&quot; title=&quot;优化目标&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+    
+      <category term="TA" scheme="http://yoursite.com/tags/TA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开发规范</title>
+    <link href="http://yoursite.com/2019/07/27/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2019/07/27/开发规范/</id>
+    <published>2019-07-27T07:04:25.000Z</published>
+    <updated>2019-07-27T07:35:07.894Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;开发规范&quot;&gt;&lt;a href=&quot;#开发规范&quot; class=&quot;headerlink&quot; title=&quot;开发规范&quot;&gt;&lt;/a&gt;开发规范&lt;/h1&gt;&lt;h2 id=&quot;编程规范&quot;&gt;&lt;a href=&quot;#编程规范&quot; class=&quot;headerlink&quot; title=&quot;编程规范&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+    
+      <category term="TA" scheme="http://yoursite.com/tags/TA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/07/23/hello-world/"/>
+    <id>http://yoursite.com/2019/07/23/hello-world/</id>
+    <published>2019-07-23T11:56:19.605Z</published>
+    <updated>2019-07-23T11:56:19.606Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
