@@ -511,6 +511,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/lock.lock()/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="geyafei">
+      <meta itemprop="description" content="葛亚飞博客~">
+      <meta itemprop="image" content="/images/our.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一棵树 Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/27/lock.lock()/" class="post-title-link" itemprop="url">lock.lock()为何要放在try之前？</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-27 15:04:25" itemprop="dateCreated datePublished" datetime="2019-07-27T15:04:25+08:00">2019-07-27</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-12 17:19:43" itemprop="dateModified" datetime="2019-08-12T17:19:43+08:00">2019-08-12</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>小伙伴今天问了一个问题。
+
+Lock lock = new ReentrantLock();
+lock.lock();
+try{
+    finally{
+        lock.unlock();
+    }
+}</code></pre><p>在finally块中释放锁，目的是保证在获取锁之后，最终能被释放。<br>不要将候区锁的过程写在try块中，因为如果在获取锁（自定义锁）时发生异常，异常抛出同时，也会导致锁无故释放。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>小伙伴提出的疑问很有道理 异常发生的释放锁有啥问题………………不就是担心某些情况下锁忘记释放了嘛！<br>其实我们想一下小伙伴主要想问的就是两种情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">case1</span><br><span class="line">try&#123;</span><br><span class="line"> lock.lock();</span><br><span class="line">...</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">lock.unlock();</span><br><span class="line">&#125;</span><br><span class="line">case2</span><br><span class="line">lock.lock();</span><br><span class="line">try&#123;</span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">lock.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实书中说的也很明白了 当自定义锁的实现的时候 发生异常 当异常抛出的时候就有可能导致无故释放锁<br>我们来看一下成熟的实现 比如某httpclient:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public void shutdown() throws IOException &#123;</span><br><span class="line">    if (this.isShutDown) &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line">    this.isShutDown = true;</span><br><span class="line">    this.lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        for (final E entry: this.available) &#123;</span><br><span class="line">            entry.close();</span><br><span class="line">        &#125;</span><br><span class="line">        for (final E entry: this.leased) &#123;</span><br><span class="line">            entry.close();</span><br><span class="line">        &#125;</span><br><span class="line">        for (final RouteSpecificPool&lt;T, C, E&gt; pool: this.routeToPool.values()) &#123;</span><br><span class="line">            pool.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">        this.routeToPool.clear();</span><br><span class="line">        this.leased.clear();</span><br><span class="line">        this.available.clear();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        this.lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好像真的是lock放在了try..catch了。<br>    我们设想一下场景如下 如果我们自定义了锁的话 由于lock接口如下：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Acquires the lock.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;If the lock is not available then the current thread becomes</span><br><span class="line"> * disabled for thread scheduling purposes and lies dormant until the</span><br><span class="line"> * lock has been acquired.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;&lt;b&gt;Implementation Considerations&lt;/b&gt;</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;A &#123;@code Lock&#125; implementation may be able to detect erroneous use</span><br><span class="line"> * of the lock, such as an invocation that would cause deadlock, and</span><br><span class="line"> * may throw an (unchecked) exception in such circumstances.  The</span><br><span class="line"> * circumstances and the exception type must be documented by that</span><br><span class="line"> * &#123;@code Lock&#125; implementation.</span><br><span class="line"> */</span><br><span class="line">void lock();</span><br></pre></td></tr></table></figure></p>
+<p>关于lock接口要求由于签名没有抛任何异常 那么其实 非受检异常是可以抛出的 比如npe等等<br>那么假设我们实现了一个锁如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class CustomLock extends ReentrantLock &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void lock() &#123;</span><br><span class="line">        int i = 1 / 0;</span><br><span class="line">        super.lock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>基于这种情况下我们写出符合上述的测试用例~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testLockFinally() &#123;</span><br><span class="line">    Lock lock = new CustomLock();</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line"></span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void testLock2Finally() &#123;</span><br><span class="line">    Lock lock = new CustomLock();</span><br><span class="line">    try &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中对于case1来说锁跑出了如下异常:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ArithmeticException: / by zero</span><br><span class="line"></span><br><span class="line">	at com.alibaba.tmallcz.gateway.lock.LockTest.testFinally(LockTest.java:12)</span><br><span class="line">对于case2来说确实另一个异常了</span><br><span class="line">java.lang.IllegalMonitorStateException</span><br><span class="line">	at java.util.concurrent.locks.ReentrantLock$Sync.tryRelease(ReentrantLock.java:151)</span><br><span class="line">	at java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1261)</span><br><span class="line">	at java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:457)</span><br><span class="line">	at com.alibaba.tmallcz.gateway.lock.LockTest.testLock2Finally(LockTest.java:47)</span><br><span class="line">很明显其实ArithmeticException这个异常被吞了 这个和java的设计也有关系 java本身支持单返回值</span><br><span class="line">这这边可以看出 当一把锁没有正确加上然后直接进行解锁会出现异常IllegalMonitorStateException 也正如javadoc中所描述</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Releases the lock.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;&lt;b&gt;Implementation Considerations&lt;/b&gt;</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;A &#123;@code Lock&#125; implementation will usually impose</span><br><span class="line"> * restrictions on which thread can release a lock (typically only the</span><br><span class="line"> * holder of the lock can release it) and may throw</span><br><span class="line"> * an (unchecked) exception if the restriction is violated.</span><br><span class="line"> * Any restrictions and the exception</span><br><span class="line"> * type must be documented by that &#123;@code Lock&#125; implementation.</span><br><span class="line"> */</span><br><span class="line">void unlock();</span><br></pre></td></tr></table></figure>
+
+<p>总结<br>将lock.lock放在try之前是一种较好的实践</p>
+<hr>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/开发规范/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1632,7 +1812,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1653,7 +1833,9 @@
         
           
         
-        <span class="site-state-item-count">1</span>
+          
+        
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

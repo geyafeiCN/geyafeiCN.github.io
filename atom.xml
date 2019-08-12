@@ -38,6 +38,27 @@
   </entry>
   
   <entry>
+    <title>lock.lock()为何要放在try之前？</title>
+    <link href="http://yoursite.com/2019/07/27/lock.lock()/"/>
+    <id>http://yoursite.com/2019/07/27/lock.lock()/</id>
+    <published>2019-07-27T07:04:25.000Z</published>
+    <updated>2019-08-12T09:19:43.292Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;开发规范&quot;&gt;&lt;a href=&quot;#开发规范&quot; class=&quot;headerlink&quot; title=&quot;开发规范&quot;&gt;&lt;/a&gt;开发规范&lt;/h1&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h
+      
+    
+    </summary>
+    
+    
+      <category term="源码分析" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>开发规范</title>
     <link href="http://yoursite.com/2019/07/27/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"/>
     <id>http://yoursite.com/2019/07/27/开发规范/</id>
