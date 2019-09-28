@@ -339,6 +339,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/lock.lock()/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="geyafei">
+      <meta itemprop="description" content="葛亚飞博客~">
+      <meta itemprop="image" content="/images/our.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一棵树 Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/27/lock.lock()/" class="post-title-link" itemprop="url">lock.lock()为何要放在try之前？</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-27 15:04:25" itemprop="dateCreated datePublished" datetime="2019-07-27T15:04:25+08:00">2019-07-27</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-28 10:56:39" itemprop="dateModified" datetime="2019-09-28T10:56:39+08:00">2019-09-28</time>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>
+              开发规范背景小伙伴今天问了一个问题。
+
+Lock lock = new ReentrantLock();
+lock.lock();
+try{
+    finally{
+        lock.unlock();
+    }
+}在finally块中释放锁，目的是保证在获取锁之后，最终能被释放。不要将
+              ...
+            </p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/27/lock.lock()/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/TA优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -425,219 +595,38 @@
       
         
           
-            <h1 id="TA优化"><a href="#TA优化" class="headerlink" title="TA优化"></a>TA优化</h1><h2 id="优化目标"><a href="#优化目标" class="headerlink" title="优化目标"></a>优化目标</h2><blockquote>
-<p>优化到什么程度？多少数据下的优化，要达到什么目标</p>
-</blockquote>
-<h2 id="优化范围"><a href="#优化范围" class="headerlink" title="优化范围"></a>优化范围</h2><ul>
-<li><del>检查和清算</del></li>
-</ul>
-<blockquote>
-<p>校验、检查、清算三步分开</p>
-</blockquote>
-<h2 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h2><ul>
-<li><p><del>redis就不要考虑</del></p>
-</li>
-<li><p>只有SQL优化</p>
-</li>
-</ul>
-<p>1 本身SQL优化（有风险）</p>
-<blockquote>
-<p>风险程度不是太高，为什么呢？因为可以做对比啊。原有查询什么样修改后还保证一直就可以了。</p>
-</blockquote>
-<p>2 数据库索引</p>
-<p>3 SQL查询时间点（有风险）（可调整也可不调整）</p>
-<blockquote>
-<p>有些查询是不是可以前置？（<strong>在不考虑缓存的情况下</strong>）</p>
-</blockquote>
-<blockquote>
-<p>eg:100W的申请同一个产品下，那么参数是不是是直接放到产品清算的上下文中去做。<strong>要考虑什么时候清除覆盖</strong></p>
-</blockquote>
-<p>4 提交</p>
-<blockquote>
-<p>之前数据处理和持久化代码层面上已经分开了，但是没有做到批量提交，这个是一个优化点。</p>
-</blockquote>
+            <p>
+              TA优化优化目标
+优化到什么程度？多少数据下的优化，要达到什么目标
 
+优化范围
+检查和清算
+
+
+校验、检查、清算三步分开
+
+优化方向
+redis就不要考虑
+
+只有SQL优化
+
+
+1 本身SQL优化（有风险）
+
+风险程度不是太高，为什么呢？因为可以做对比啊。原有查询什么样修改后还保证一直就可以了。
+
+
+              ...
+            </p>
+          <!--noindex-->
           
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/27/lock.lock()/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="geyafei">
-      <meta itemprop="description" content="葛亚飞博客~">
-      <meta itemprop="image" content="/images/our.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一棵树 Home">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/27/lock.lock()/" class="post-title-link" itemprop="url">lock.lock()为何要放在try之前？</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/27/TA优化/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-27 15:04:25" itemprop="dateCreated datePublished" datetime="2019-07-27T15:04:25+08:00">2019-07-27</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-12 17:19:43" itemprop="dateModified" datetime="2019-08-12T17:19:43+08:00">2019-08-12</time>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><pre><code>小伙伴今天问了一个问题。
-
-Lock lock = new ReentrantLock();
-lock.lock();
-try{
-    finally{
-        lock.unlock();
-    }
-}</code></pre><p>在finally块中释放锁，目的是保证在获取锁之后，最终能被释放。<br>不要将候区锁的过程写在try块中，因为如果在获取锁（自定义锁）时发生异常，异常抛出同时，也会导致锁无故释放。</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>小伙伴提出的疑问很有道理 异常发生的释放锁有啥问题………………不就是担心某些情况下锁忘记释放了嘛！<br>其实我们想一下小伙伴主要想问的就是两种情况：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">case1</span><br><span class="line">try&#123;</span><br><span class="line"> lock.lock();</span><br><span class="line">...</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">lock.unlock();</span><br><span class="line">&#125;</span><br><span class="line">case2</span><br><span class="line">lock.lock();</span><br><span class="line">try&#123;</span><br><span class="line"> </span><br><span class="line">...</span><br><span class="line">&#125;finally&#123;</span><br><span class="line">lock.unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其实书中说的也很明白了 当自定义锁的实现的时候 发生异常 当异常抛出的时候就有可能导致无故释放锁<br>我们来看一下成熟的实现 比如某httpclient:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public void shutdown() throws IOException &#123;</span><br><span class="line">    if (this.isShutDown) &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line">    this.isShutDown = true;</span><br><span class="line">    this.lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        for (final E entry: this.available) &#123;</span><br><span class="line">            entry.close();</span><br><span class="line">        &#125;</span><br><span class="line">        for (final E entry: this.leased) &#123;</span><br><span class="line">            entry.close();</span><br><span class="line">        &#125;</span><br><span class="line">        for (final RouteSpecificPool&lt;T, C, E&gt; pool: this.routeToPool.values()) &#123;</span><br><span class="line">            pool.shutdown();</span><br><span class="line">        &#125;</span><br><span class="line">        this.routeToPool.clear();</span><br><span class="line">        this.leased.clear();</span><br><span class="line">        this.available.clear();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        this.lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>好像真的是lock放在了try..catch了。<br>    我们设想一下场景如下 如果我们自定义了锁的话 由于lock接口如下：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Acquires the lock.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;If the lock is not available then the current thread becomes</span><br><span class="line"> * disabled for thread scheduling purposes and lies dormant until the</span><br><span class="line"> * lock has been acquired.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;&lt;b&gt;Implementation Considerations&lt;/b&gt;</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;A &#123;@code Lock&#125; implementation may be able to detect erroneous use</span><br><span class="line"> * of the lock, such as an invocation that would cause deadlock, and</span><br><span class="line"> * may throw an (unchecked) exception in such circumstances.  The</span><br><span class="line"> * circumstances and the exception type must be documented by that</span><br><span class="line"> * &#123;@code Lock&#125; implementation.</span><br><span class="line"> */</span><br><span class="line">void lock();</span><br></pre></td></tr></table></figure></p>
-<p>关于lock接口要求由于签名没有抛任何异常 那么其实 非受检异常是可以抛出的 比如npe等等<br>那么假设我们实现了一个锁如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class CustomLock extends ReentrantLock &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void lock() &#123;</span><br><span class="line">        int i = 1 / 0;</span><br><span class="line">        super.lock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>基于这种情况下我们写出符合上述的测试用例~</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testLockFinally() &#123;</span><br><span class="line">    Lock lock = new CustomLock();</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line"></span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void testLock2Finally() &#123;</span><br><span class="line">    Lock lock = new CustomLock();</span><br><span class="line">    try &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中对于case1来说锁跑出了如下异常:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ArithmeticException: / by zero</span><br><span class="line"></span><br><span class="line">	at com.alibaba.tmallcz.gateway.lock.LockTest.testFinally(LockTest.java:12)</span><br><span class="line">对于case2来说确实另一个异常了</span><br><span class="line">java.lang.IllegalMonitorStateException</span><br><span class="line">	at java.util.concurrent.locks.ReentrantLock$Sync.tryRelease(ReentrantLock.java:151)</span><br><span class="line">	at java.util.concurrent.locks.AbstractQueuedSynchronizer.release(AbstractQueuedSynchronizer.java:1261)</span><br><span class="line">	at java.util.concurrent.locks.ReentrantLock.unlock(ReentrantLock.java:457)</span><br><span class="line">	at com.alibaba.tmallcz.gateway.lock.LockTest.testLock2Finally(LockTest.java:47)</span><br><span class="line">很明显其实ArithmeticException这个异常被吞了 这个和java的设计也有关系 java本身支持单返回值</span><br><span class="line">这这边可以看出 当一把锁没有正确加上然后直接进行解锁会出现异常IllegalMonitorStateException 也正如javadoc中所描述</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Releases the lock.</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;&lt;b&gt;Implementation Considerations&lt;/b&gt;</span><br><span class="line"> *</span><br><span class="line"> * &lt;p&gt;A &#123;@code Lock&#125; implementation will usually impose</span><br><span class="line"> * restrictions on which thread can release a lock (typically only the</span><br><span class="line"> * holder of the lock can release it) and may throw</span><br><span class="line"> * an (unchecked) exception if the restriction is violated.</span><br><span class="line"> * Any restrictions and the exception</span><br><span class="line"> * type must be documented by that &#123;@code Lock&#125; implementation.</span><br><span class="line"> */</span><br><span class="line">void unlock();</span><br></pre></td></tr></table></figure>
-
-<p>总结<br>将lock.lock放在try之前是一种较好的实践</p>
-<hr>
-
-          
+          <!--/noindex-->
         
       
     </div>
@@ -777,806 +766,28 @@ try{
       
         
           
-            <h1 id="开发规范"><a href="#开发规范" class="headerlink" title="开发规范"></a>开发规范</h1><h2 id="编程规范"><a href="#编程规范" class="headerlink" title="编程规范"></a>编程规范</h2><h3 id="命名规约"><a href="#命名规约" class="headerlink" title="命名规约"></a>命名规约</h3><h4 id="1-【强制】"><a href="#1-【强制】" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>代码中的命名均不能以下划线或美元符号开始，也不能以下划线或美元符号结束。<br></p>
-<blockquote>
-<p>反例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_name/__name/$Object/name_/name$/Object$</span><br></pre></td></tr></table></figure>
+            <p>
+              开发规范编程规范命名规约1.【强制】代码中的命名均不能以下划线或美元符号开始，也不能以下划线或美元符号结束。
 
-<hr>
-<h4 id="2-【强制】"><a href="#2-【强制】" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。</p>
-<blockquote>
-<p>说明：<br><br>正确的英文拼写和语法可以让阅读者易于理解，避免歧义。注意，即使纯拼音命名方式也要避免采用。<br><br>反例：<br><br>DaZhePromotion[打折]/getPingfenByName()[评分]/int 某变量 = 3<br><br>正例：<br><br>alibaba/ taobao/ youku/ hangzhou等国际通用的名称，可视同英文。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】"><a href="#3-【强制】" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>类名使用UpperCamelCase风格，必须遵从驼峰形式，但以下情形例外：<br><br>(领域模型的相关命名)DO/ BO / DTO/ VO等。<br></p>
-<blockquote>
-<p>正例：<br><br>MarcoPolo/ UserDO/ XmlService/ TcpUdpDeal/ TaPromotion<br><br>反例：<br><br>macroPolo/ UserDo/ XMLService/ TCPUDPDeal/ TAPromotion</p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】"><a href="#4-【强制】" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>方法名、参数名、成员变量、局部变量都统一使用lowerCamelCase风格，必须遵从驼峰形式。<br></p>
-<blockquote>
-<p>正例：<br><br>localValue/ getHttpMessage()/ inputUserId</p>
-</blockquote>
-<hr>
-<h4 id="5-【强制】"><a href="#5-【强制】" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>常量命名全部大写，单词间用下划线隔开，力求语义表达完整清楚，不要嫌名字长。<br></p>
-<blockquote>
-<p>正例：<br><br>MAX_STOCK_COUNT<br><br>反例：<br><br>MAX_COUNT</p>
-</blockquote>
-<hr>
-<h4 id="6-【强制】"><a href="#6-【强制】" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p>抽象类命名使用Abstract或Base开头；异常类命名使用Exception结尾；测试类命名以它要测试的类的名称开始，以Test结尾。</p>
-<hr>
-<h4 id="7-【强制】"><a href="#7-【强制】" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>中括号是数组类型的一部分，数组定义如下：String[]args;<br></p>
-<blockquote>
-<p>反例：<br><br>请勿使用String args[]的方式来定义。</p>
-</blockquote>
-<hr>
-<h4 id="8-【强制】"><a href="#8-【强制】" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p>POJO类中布尔类型的变量，都不要加is，否则部分框架解析会引起序列化错误。<br></p>
-<blockquote>
-<p>反例：<br><br>定义为基本数据类型boolean isSuccess；的属性，它的方法也是isSuccess()，RPC框架在反向解析的时候，“以为”对应的属性名称是success，导致属性获取不到，进而抛出异常。</p>
-</blockquote>
-<hr>
-<h4 id="9-【强制】"><a href="#9-【强制】" class="headerlink" title="9.【强制】"></a>9.【强制】</h4><p>包名统一使用小写，点分隔符之间有且仅有一个自然语义的英语单词。包名统一使用单数形式，但是类名如果有复数含义，类名可以使用复数形式。<br></p>
-<blockquote>
-<p>正例：<br><br>应用工具类包名为com.alibaba.open.util、类名为MessageUtils（此规则参考spring的框架结构）</p>
-</blockquote>
-<hr>
-<h4 id="10-【强制】"><a href="#10-【强制】" class="headerlink" title="10.【强制】"></a>10.【强制】</h4><p>杜绝完全不规范的缩写，避免望文不知义。<br></p>
-<blockquote>
-<p>反例：<br><br>AbstractClass“缩写”命名成AbsClass；condition“缩写”命名成condi，此类随意缩写严重降低了代码的可阅读性。</p>
-</blockquote>
-<hr>
-<h4 id="11-【推荐】"><a href="#11-【推荐】" class="headerlink" title="11.【推荐】"></a>11.【推荐】</h4><p>如果使用到了设计模式，建议在类名中体现出具体模式。<br></p>
-<blockquote>
-<p>说明：<br><br>将设计模式体现在名字中，有利于阅读者快速理解架构设计思想。<br><br>正例：<br><br>public class OrderFactory;<br><br>public class LoginProxy;<br><br>public class ResourceObserver;</p>
-</blockquote>
-<hr>
-<h4 id="12-【强制】"><a href="#12-【强制】" class="headerlink" title="12.【强制】"></a>12.【强制】</h4><p>内部的实现类用Impl的后缀与接口区别。<br></p>
-<blockquote>
-<p>正例：<br><br>CacheServiceImpl实现CacheService接口。</p>
-</blockquote>
-<hr>
-<h4 id="13-【参考】"><a href="#13-【参考】" class="headerlink" title="13.【参考】"></a>13.【参考】</h4><p>枚举类名建议带上Enum后缀，枚举成员名称需要全大写，单词间用下划线隔开。<br></p>
-<blockquote>
-<p>说明：<br><br>枚举其实就是特殊的常量类，且构造方法被默认强制是私有。<br><br>正例：<br><br>枚举名字：DealStatusEnum    <br><br>成员名称：SUCCESS/ UNKOWN_REASON。</p>
-</blockquote>
-<hr>
-<h4 id="14-【参考】"><a href="#14-【参考】" class="headerlink" title="14.【参考】"></a>14.【参考】</h4><ul>
-<li>各层命名规约：</li>
-<li>Service/DAO层方法命名规约<ol>
-<li>获取单个对象的方法用get做前缀。</li>
-<li>获取多个对象的方法用list做前缀。</li>
-<li>获取统计值的方法用count做前缀。</li>
-<li>插入的方法用save（推荐）或insert做前缀。</li>
-<li>删除的方法用remove（推荐）或delete做前缀。</li>
-<li>修改的方法用update做前缀。</li>
-</ol>
-</li>
-<li>领域模型命名规约<ol>
-<li>展示对象：xxxVO，xxx一般为网页名称。</li>
-</ol>
-</li>
-</ul>
-<hr>
-<h3 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h3><h4 id="1-【强制】-1"><a href="#1-【强制】-1" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>不允许出现任何魔法值（即未经定义的常量）直接出现在代码中。<br></p>
-<blockquote>
-<p>反例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String key = &quot;Id#taobao_&quot;+tradeId；</span><br><span class="line">cache.put(key, value);</span><br></pre></td></tr></table></figure>
+反例：
 
-<hr>
-<h4 id="2-【强制】-1"><a href="#2-【强制】-1" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>long或者Long初始赋值时，必须使用大写的L，不能是小写的l，小写容易跟数字1混淆，造成误解。<br></p>
-<blockquote>
-<p>说明：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Long a = 2l;</span><br></pre></td></tr></table></figure>
+_name/__name/$Object/name_/name$/Object$
 
-<blockquote>
-<p>写的是数字的21，还是Long型的2?</p>
-</blockquote>
-<hr>
-<h4 id="3-【推荐】"><a href="#3-【推荐】" class="headerlink" title="3.【推荐】"></a>3.【推荐】</h4><p>不要使用一个常量类维护所有常量，应该按常量功能进行归类，分开维护。如：缓存相关的常量放在类：CacheConsts下；系统配置相关的常量放在类：ConfigConsts下。<br></p>
-<blockquote>
-<p>说明：<br><br>大而全的常量类，非得使用查找功能才能定位到修改的常量，不利于理解和维护。</p>
-</blockquote>
-<hr>
-<h4 id="4-【推荐】"><a href="#4-【推荐】" class="headerlink" title="4.【推荐】"></a>4.【推荐】</h4><p>如果变量值仅在一个范围内变化用Enum类。如果还带有名称之外的延伸属性，必须使用Enum类，下面正例中的数字就是延伸信息，表示星期几。<br></p>
-<blockquote>
-<p>正例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public Enum&#123; </span><br><span class="line">    MONDAY(1), </span><br><span class="line">    TUESDAY(2), </span><br><span class="line">    WEDNESDAY(3), </span><br><span class="line">    THURSDAY(4), </span><br><span class="line">    FRIDAY(5), </span><br><span class="line">    SATURDAY(6), </span><br><span class="line">    SUNDAY(7);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<hr>
-<h3 id="格式规约"><a href="#格式规约" class="headerlink" title="格式规约"></a>格式规约</h3><h4 id="1-【强制】-2"><a href="#1-【强制】-2" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>大括号的使用约定。如果是大括号内为空，则简洁地写成{}即可，不需要换行；如果是非空代码块则：<br></p>
-<ol>
-<li>左大括号前不换行。<br></li>
-<li>左大括号后换行。<br></li>
-<li>右大括号前换行。<br></li>
-<li>右大括号后还有else等代码则不换行；<br></li>
-<li>表示终止右大括号后必须换行。</li>
-</ol>
-<hr>
-<h4 id="2-【强制】-2"><a href="#2-【强制】-2" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>左括号和后一个字符之间不出现空格；同样，右括号和前一个字符之间也不出现空格。<br></p>
-<hr>
-<h4 id="3-【强制】-1"><a href="#3-【强制】-1" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p><strong>任何运算符左右必须加一个空格。</strong><br></p>
-<blockquote>
-<p>说明：<br>运算符包括赋值运算符=、逻辑运算符&amp;&amp;、加减乘除符号、三目运行符等。</p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】-1"><a href="#4-【强制】-1" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p><strong>针对这个规范，其实在开发工具中统一配置，不过扩展来看是否可以弄一个统一的配置文件进行开发工具导入，这样不需要每次都要配置，或者出现开发人员自行更改的情况。</strong><br><br>单行字符数限制不超过120个，超出需要换行，换行时遵循如下原则：<br></p>
-<ol>
-<li>第二行相对第一行缩进4个空格，从第三行开始，不再继续缩进，参考示例。</li>
-<li>运算符与下文一起换行。</li>
-<li>方法调用的点符号与下文一起换行。</li>
-<li>在多个参数超长，逗号后进行换行。</li>
-<li>在括号前不要换行，见反例。</li>
-</ol>
-<blockquote>
-<p>正例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer sb = new StringBuffer(); </span><br><span class="line">//超过120个字符的情况下，换行缩进4个空格，并且方法前的点符号一起换行</span><br><span class="line">sb.append(&quot;zi&quot;).append(&quot;xin&quot;)...</span><br><span class="line">    .append(&quot;huang&quot;)... </span><br><span class="line">    .append(&quot;huang&quot;)... </span><br><span class="line">    .append(&quot;huang&quot;);</span><br></pre></td></tr></table></figure>
+2.【强制】代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。
 
-<blockquote>
-<p>反例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer sb = new StringBuffer(); </span><br><span class="line">//超过120个字符的情况下，不要在括号前换行</span><br><span class="line">sb.append(&quot;zi&quot;).append(&quot;xin&quot;)...append     </span><br><span class="line">    (&quot;huang&quot;);  </span><br><span class="line">//参数很多的方法调用可能超过120个字符，不要在逗号前换行</span><br><span class="line">method(args1, args2, args3, ...     </span><br><span class="line">    , argsX);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>ECLIPSE中配置单行字符数长度<br></p>
-</blockquote>
-<p><img src="http://note.youdao.com/yws/api/personal/file/ADB2974FEC924B3B8491D801B1168DFC?method=download&shareKey=6485e2a0b4fa5048f14fa2fc1f2cdca3" alt="image"></p>
-<hr>
-<h4 id="5-【强制】-1"><a href="#5-【强制】-1" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>方法参数在定义和传入时，多个参数逗号后边<strong>必须加空格</strong>。<br></p>
-<blockquote>
-<p>正例：<br><br>下例中实参的”a”,后边必须要有一个空格。method(“a”, “b”, “c”); </p>
-</blockquote>
-<hr>
-<h4 id="6-【强制】-1"><a href="#6-【强制】-1" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p><strong>IDE的textfileencoding设置为UTF-8;IDE中文件的换行符使用Unix格式，不要使用windows格式。<br></strong></p>
-<blockquote>
-<p>如何设置ECLIPSE的换行符格式<br><br><img src="http://note.youdao.com/yws/api/personal/file/F417FCDF1C3F477989F2D39BF5434E03?method=download&shareKey=0a989ca4638f096d81478eed75fcec75" alt="image"><br><br>如何在ECLIPSE编辑页面中显示\r\n换行符，分为统一配置以及引入插件后直接通过点击图标控制<br><br><img src="http://note.youdao.com/yws/api/personal/file/0E15F6E9F6A94065854CA60DA5D0B881?method=download&shareKey=8bd48c5230dfb15e8b9c2f9158817bb1" alt="image"><br><br><img src="http://note.youdao.com/yws/api/personal/file/6EF3D3D823004387951795212972A7F1?method=download&shareKey=48336c026580953d42945e243ec8043c" alt="image"><br></p>
-</blockquote>
-<hr>
-<h4 id="7-【推荐】"><a href="#7-【推荐】" class="headerlink" title="7.【推荐】"></a>7.【推荐】</h4><p>没有必要增加若干空格来使某一行的字符与上一行的相应字符对齐。<br></p>
-<blockquote>
-<p>正例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a = 3; </span><br><span class="line">long b = 4L; </span><br><span class="line">float c = 5F;</span><br><span class="line">StringBuffer sb = new StringBuffer();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>说明：<br><br>增加sb这个变量，如果需要对齐，则给a、b、c都要增加几个空格，在变量比较多的情况下，是一种累赘的事情。</p>
-</blockquote>
-<hr>
-<h4 id="8-【强制】-1"><a href="#8-【强制】-1" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p><strong>方法体内的执行语句组、变量的定义语句组、不同的业务逻辑之间或者不同的语义之间插入一个空行。相同业务逻辑和语义之间不需要插入空行。</strong><br></p>
-<blockquote>
-<p>说明：<br><br>没有必要插入<strong>多行空格</strong>进行隔开。</p>
-</blockquote>
-<hr>
-<h3 id="OOP规约"><a href="#OOP规约" class="headerlink" title="OOP规约"></a>OOP规约</h3><h4 id="1-【强制】-3"><a href="#1-【强制】-3" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>避免通过一个类的对象引用访问此类的静态变量或静态方法，无谓增加编译器解析成本，直接用类名来访问即可。<br></p>
-<hr>
-<h4 id="2-【强制】-3"><a href="#2-【强制】-3" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>所有的覆写方法，必须加@Override注解。<br></p>
-<blockquote>
-<p>反例：<br><br>getObject()与get0bject()的问题。一个是字母的O，一个是数字的0，加@Override可以准确判断是否覆盖成功。另外，如果在抽象类中对方法签名进行修改，其实现类会马上编译报错。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-2"><a href="#3-【强制】-2" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>相同参数类型，相同业务含义，才可以使用Java的可变参数，避免使用Object。<br></p>
-<blockquote>
-<p>说明：<br><br>可变参数必须放置在参数列表的最后。（提倡同学们尽量不用可变参数编程）<br><br>正例：<br><br>public User getUsers(String type, Integer… ids)</p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】-2"><a href="#4-【强制】-2" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>对外暴露的接口签名，原则上不允许修改方法签名，避免对接口调用方产生影响。接口过时必须加@Deprecated注解，并清晰地说明采用的新接口或者新服务是什么。<br></p>
-<blockquote>
-<p>说明：<br><br>++<strong>这里需要注意，所有项目组开发或调用任何接口（其他三方API不算），不允许直接在现有的接口上进行修改，一定要按照这个规则进行，有个接口替换的过程，或者理解为接口并行，给调用方一个修改的时间。同样对于调用方而言要遵守下面的第五点要求。</strong>++</p>
-</blockquote>
-<hr>
-<h4 id="5-【强制】-2"><a href="#5-【强制】-2" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>不能使用过时的类或方法。<br></p>
-<blockquote>
-<p><strong>说明：<br><br>java.net.URLDecoder中的方法decode(String encodeStr)这个方法已经过时，应该使用双参数decode(String source, String encode)。接口提供方既然明确是过时接口，那么有义务同时提供新的接口；作为调用方来说，有义务去考证过时方法的新实现是什么。</strong></p>
-</blockquote>
-<hr>
-<h4 id="6-【强制】-2"><a href="#6-【强制】-2" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p>Object的equals方法容易抛空指针异常，应使用常量或确定有值的对象来调用equals。<br></p>
-<blockquote>
-<p>正例：<br><br>“test”.equals(object);<br><br>反例：<br><br>object.equals(“test”);<br><br>说明：<br><br>推荐使用java.util.Objects#equals（JDK7引入的工具类）</p>
-</blockquote>
-<hr>
-<h4 id="7-【强制】-1"><a href="#7-【强制】-1" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>所有的相同类型的包装类对象之间值的比较，全部使用equals方法比较。<br></p>
-<blockquote>
-<p>说明：<br><br>对于Integer var=?在-128至127之间的赋值，Integer对象是在IntegerCache.cache产生，会复用已有对象，这个区间内的Integer值可以直接使用==进行判断，但是这个区间之外的所有数据，都会在堆上产生，并不会复用已有对象，这是一个大坑，推荐使用equals方法进行判断。</p>
-</blockquote>
-<hr>
-<h4 id="8-【强制】-2"><a href="#8-【强制】-2" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p>关于基本数据类型与包装数据类型的使用标准如下：<br></p>
-<ul>
-<li>所有的POJO类属性必须使用包装数据类型。</li>
-<li>RPC方法的返回值和参数必须使用包装数据类型。</li>
-<li>所有的局部变量【推荐】使用基本数据类型。</li>
-</ul>
-<blockquote>
-<p>说明：<br><br>POJO类属性没有初值是提醒使用者在需要使用时，必须自己显式地进行赋值，任何NPE问题，或者入库检查，都由使用者来保证。<br><br>正例：<br><br>数据库的查询结果可能是null，因为自动拆箱，用基本数据类型接收有NPE风险。<br><br>反例：<br><br>比如显示成交总额涨跌情况，即正负x%，x为基本数据类型，调用的RPC服务，调用不成功时，返回的是默认值，页面显示：0%，这是不合理的，应该显示成中划线-。所以包装数据类型的null值，能够表示额外的信息，如：远程调用失败，异常退出。</p>
-</blockquote>
-<hr>
-<h4 id="9-【强制】-1"><a href="#9-【强制】-1" class="headerlink" title="9.【强制】"></a>9.【强制】</h4><p>定义DO/DTO/VO等POJO类时，不要设定任何属性默认值。<br></p>
-<blockquote>
-<p>反例：<br><br>POJO类的gmtCreate默认值为new Date();但是这个属性在数据提取时并没有置入具体值，在更新其它字段时又附带更新了此字段，导致创建时间被修改成当前时间。</p>
-</blockquote>
-<hr>
-<h4 id="10-【强制】-1"><a href="#10-【强制】-1" class="headerlink" title="10.【强制】"></a>10.【强制】</h4><p>序列化类新增属性时，请不要修改serialVersionUID字段，避免反序列失败；如果完全不兼容升级，避免反序列化混乱，那么请修改serialVersionUID值。<br></p>
-<blockquote>
-<p>说明：<br><br>注意serialVersionUID不一致会抛出序列化运行时异常。</p>
-</blockquote>
-<hr>
-<h4 id="11-【强制】"><a href="#11-【强制】" class="headerlink" title="11.【强制】"></a>11.【强制】</h4><p>构造方法里面禁止加入任何业务逻辑，如果有初始化逻辑，请放在init方法中。<br></p>
-<hr>
-<h4 id="12-【强制】-1"><a href="#12-【强制】-1" class="headerlink" title="12.【强制】"></a>12.【强制】</h4><p>POJO类必须写toString方法。使用IDE的中工具：source&gt; generatetoString时，如果继承了另一个POJO类，注意在前面加一下super.toString。<br></p>
-<blockquote>
-<p>说明：<br><br>在方法执行抛出异常时，可以直接调用POJO的toString()方法打印其属性值，便于排查问题。</p>
-</blockquote>
-<hr>
-<h4 id="13-【推荐】"><a href="#13-【推荐】" class="headerlink" title="13.【推荐】"></a>13.【推荐】</h4><p>使用索引访问用String的split方法得到的数组时，需做最后一个分隔符后有无内容的检查，否则会有抛IndexOutOfBoundsException的风险。<br></p>
-<blockquote>
-<p>说明：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;a,b,c,,&quot;; </span><br><span class="line">String[] ary = str.split(&quot;,&quot;); </span><br><span class="line">//预期大于3，结果是3</span><br><span class="line">System.out.println(ary.length);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="14-【推荐】"><a href="#14-【推荐】" class="headerlink" title="14.【推荐】"></a>14.【推荐】</h4><p>当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起，便于阅读。<br></p>
-<blockquote>
-<p>说明：<br><br><strong>针对之前的系统代码，有很多代码层次很乱，要找一个方法很难，所以不仅仅是重构的这种要排在一起，其他的方法要按照一定的意义有顺序排列。结合下面的方法顺序。</strong></p>
-</blockquote>
-<hr>
-<h4 id="15-【强制】"><a href="#15-【强制】" class="headerlink" title="15.【强制】"></a>15.【强制】</h4><p>类内方法定义顺序依次是：公有方法或保护方法&gt; 私有方法&gt; getter/setter方法。<br></p>
-<blockquote>
-<p>说明：<br><br>公有方法是类的调用者和维护者最关心的方法，首屏展示最好；保护方法虽然只是子类关心，也可能是“模板设计模式”下的核心方法；而私有方法外部一般不需要特别关心，是一个黑盒实现；因为方法信息价值较低，所有Service和DAO的getter/setter方法放在类体最后。</p>
-</blockquote>
-<hr>
-<h4 id="16-【推荐】"><a href="#16-【推荐】" class="headerlink" title="16.【推荐】"></a>16.【推荐】</h4><p>setter方法中，参数名称与类成员变量名称一致，this.成员名=参数名。在getter/setter方法中，尽量不要增加业务逻辑，增加排查问题的难度。<br></p>
-<blockquote>
-<p>反例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public Integer getData()&#123;     </span><br><span class="line">    if(true) &#123; </span><br><span class="line">        return d</span><br><span class="line">        ata + 100; </span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return data - 100;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注：<br><br>这个可能大部分人没有使用过，但是我之前在写直销回单打印的时候用过这种方式，当时是考虑调用的时候直接放入一个值，其他对应值根据一定的逻辑处理直接SET，以后这种方式要避免，不要在SETTER里面加上其他的逻辑处理。</p>
-</blockquote>
-<hr>
-<h4 id="17-【推荐】"><a href="#17-【推荐】" class="headerlink" title="17.【推荐】"></a>17.【推荐】</h4><p>循环体内，字符串的联接方式，使用StringBuilder的append方法进行扩展。<br></p>
-<blockquote>
-<p>反例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;start&quot;;     </span><br><span class="line">for(int i=0; i&lt;100; i++)&#123;         </span><br><span class="line">    str = str + &quot;hello&quot;;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>说明：<br><br>反编译出的字节码文件显示每次循环都会new出一个StringBuilder对象，然后进行append操作，最后通过toString方法返回String对象，造成内存资源浪费。</p>
-</blockquote>
-<hr>
-<h4 id="18-【推荐】"><a href="#18-【推荐】" class="headerlink" title="18.【推荐】"></a>18.【推荐】</h4><p>final可提高程序响应效率，声明成final的情况：<br></p>
-<ul>
-<li>不需要重新赋值的变量，包括类属性、局部变量。</li>
-<li>对象参数前加final，表示不允许修改引用的指向。</li>
-<li>类方法确定不允许被重写。</li>
-</ul>
-<hr>
-<h4 id="19-【推荐】"><a href="#19-【推荐】" class="headerlink" title="19.【推荐】"></a>19.【推荐】</h4><p>慎用Object的clone方法来拷贝对象。<br></p>
-<blockquote>
-<p>说明：<br><br>对象的clone方法默认是浅拷贝，若想实现深拷贝需要重写clone方法实现属性对象的拷贝。</p>
-</blockquote>
-<hr>
-<h4 id="20-【推荐】"><a href="#20-【推荐】" class="headerlink" title="20.【推荐】"></a>20.【推荐】</h4><p>类成员与方法访问控制从严：<br></p>
-<ul>
-<li>如果不允许外部直接通过new来创建对象，那么构造方法必须是private。</li>
-<li>工具类不允许有public或default构造方法。</li>
-<li>类非static成员变量并且与子类共享，必须是protected。</li>
-<li>类非static成员变量并且仅在本类使用，必须是private。</li>
-<li>类static成员变量如果仅在本类使用，必须是private。</li>
-<li>若是static成员变量，必须考虑是否为final。</li>
-<li>类成员方法只供类内部调用，必须是private。</li>
-<li>类成员方法只对继承类公开，那么限制为protected。</li>
-</ul>
-<blockquote>
-<p>说明：<br><br>任何类、方法、参数、变量，严控访问范围。过宽泛的访问范围，不利于模块解耦。思考：如果是一个private的方法，想删除就删除，可是一个public的Service方法，或者一个public的成员变量，删除一下，不得手心冒点汗吗？变量像自己的小孩，尽量在自己的视线内，变量作用域太大，如果无限制的到处跑，那么你会担心的。</p>
-</blockquote>
-<hr>
-<h3 id="集合处理"><a href="#集合处理" class="headerlink" title="集合处理"></a>集合处理</h3><h4 id="1-【强制】-4"><a href="#1-【强制】-4" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>关于hashCode和equals的处理，遵循如下规则：<br></p>
-<ul>
-<li>只要重写equals，就必须重写hashCode。</li>
-<li><strong>因为Set存储的是不重复的对象，依据hashCode和equals进行判断，所以Set存储的对象必须重写这两个方法。</strong></li>
-<li><strong>如果自定义对象做为Map的键，那么必须重写hashCode和equals。</strong></li>
-</ul>
-<blockquote>
-<p>正例：<br><br>String重写了hashCode和equals方法，所以我们可以非常愉快地使用String对象作为key来使用。</p>
-</blockquote>
-<hr>
-<h4 id="2-【强制】-4"><a href="#2-【强制】-4" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>ArrayList的subList结果不可强转成ArrayList，否则会抛出ClassCastException异常：java.util.RandomAccessSubListcannotbecasttojava.util.ArrayList;<br></p>
-<blockquote>
-<p>说明：<br><br>subList返回的是ArrayList的内部类SubList，并不是ArrayList，而是ArrayList的一个视图，对于SubList子列表的所有操作最终会反映到原列表上。<br><br>注：<br><br>这个可能不会用到，注意一下。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-3"><a href="#3-【强制】-3" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>在subList场景中，高度注意对原集合元素个数的修改，会导致子列表的遍历、增加、删除均产生ConcurrentModificationException异常。<br></p>
-<hr>
-<h4 id="4-【强制】-3"><a href="#4-【强制】-3" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>使用集合转数组的方法，必须使用集合的toArray(T[] array)，传入的是类型完全一样的数组，大小就是list.size()。<br></p>
-<blockquote>
-<p>反例：<br><br>直接使用toArray无参方法存在问题，此方法返回值只能是Object[]类，若强转其它类型数组将出现ClassCastException错误。<br><br>正例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;(2);     </span><br><span class="line">list.add(&quot;guan&quot;);     </span><br><span class="line">list.add(&quot;bao&quot;);      </span><br><span class="line">String[] array = new String[list.size()];     </span><br><span class="line">array = list.toArray(array);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>说明：<br><br>使用toArray带参方法，入参分配的数组空间不够大时，toArray方法内部将重新分配内存空间，并返回新数组地址；如果数组元素大于实际所需，下标为[list.size()]的数组元素将被置为null，其它数组元素保持原值，因此最好将方法入参数组大小定义与集合元素个数一致。</p>
-</blockquote>
-<hr>
-<h4 id="5-【强制】-3"><a href="#5-【强制】-3" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>使用工具类Arrays.asList()把数组转换成集合时，不能使用其修改集合相关的方法，它的add/remove/clear方法会抛出UnsupportedOperationException异常。<br></p>
-<blockquote>
-<p>说明：<br><br>asList的返回对象是一个Arrays内部类，并没有实现集合的修改方法。Arrays.asList体现的是适配器模式，只是转换接口，后台的数据仍是数组。<br><br>String[] str = new String[] { “a”, “b” };<br><br>List list = Arrays.asList(str);<br><br>第一种情况：<br><br>list.add(“c”); <br><br>运行时异常。<br><br>第二种情况：<br><br>str[0]= “gujin”;<br><br>那么list.get(0)也会随之修改。</p>
-</blockquote>
-<hr>
-<h4 id="6-【强制】-3"><a href="#6-【强制】-3" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p>泛型通配符&lt;? extends T&gt;来接收返回的数据，此写法的泛型集合不能使用add方法。<br></p>
-<blockquote>
-<p>说明：<br><br>苹果装箱后返回一个&lt;? extends Fruits&gt;对象，此对象就不能往里加任何水果，包括苹果。</p>
-</blockquote>
-<hr>
-<h4 id="7-【强制】-2"><a href="#7-【强制】-2" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>不要在foreach循环里进行元素的remove/add操作。remove元素请使用Iterator方式，如果并发操作，需要对<br>Iterator对象加锁。<br></p>
-<blockquote>
-<p>反例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; a = new ArrayList&lt;String&gt;();     </span><br><span class="line">a.add(&quot;1&quot;);     </span><br><span class="line">a.add(&quot;2&quot;);     </span><br><span class="line">for (String temp : a) &#123;         </span><br><span class="line">    if(&quot;1&quot;.equals(temp))&#123;             </span><br><span class="line">        a.remove(temp);         </span><br><span class="line">    &#125;     </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>说明：<br><br>以上代码的执行结果肯定会出乎大家的意料，那么试一下把“1”换成“2”，会是同样的结果吗？<br><br>正例：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;String&gt; it = a.iterator(); </span><br><span class="line">while(it.hasNext())&#123;             </span><br><span class="line">    String temp =  it.next();     </span><br><span class="line">    if(删除元素的条件)&#123;                   </span><br><span class="line">        it.remove();                </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="8-【推荐】"><a href="#8-【推荐】" class="headerlink" title="8.【推荐】"></a>8.【推荐】</h4><p>使用entrySet遍历Map类集合KV，而不是keySet方式进行遍历。<br></p>
-<blockquote>
-<p>说明：<br><br>keySet其实是遍历了2次，一次是转为Iterator对象，另一次是从hashMap中取出key所对应的value。而entrySet只是遍历了一次就把key和value都放到了entry中，效率更高。如果是JDK8，使用Map.foreach方法。<br><br>正例：<br><br>values()返回的是V值集合，是一个list集合对象；keySet()返回的是K值集合，是一个Set集合对象；entrySet()返回的是K-V值组合集合。</p>
-</blockquote>
-<hr>
-<h4 id="9-【参考】"><a href="#9-【参考】" class="headerlink" title="9.【参考】"></a>9.【参考】</h4><p>合理利用好集合的有序性(sort)和稳定性(order)，避免集合的无序性(unsort)和不稳定性(unorder)带来的负面影响。<br></p>
-<blockquote>
-<p>说明：<br><br>稳定性指集合每次遍历的元素次序是一定的。有序性是指遍历的结果是按某种比较规则依次排列的。如：ArrayList是order/unsort；HashMap是unorder/unsort；TreeSet是order/sort。</p>
-</blockquote>
-<hr>
-<h4 id="10-【参考】"><a href="#10-【参考】" class="headerlink" title="10.【参考】"></a>10.【参考】</h4><p>利用Set元素唯一的特性，可以快速对一个集合进行去重操作，避免使用List的contains方法进行遍历、对比、去重操作。<br></p>
-<hr>
-<h3 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h3><h4 id="1-【强制】-5"><a href="#1-【强制】-5" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>在一个switch块内，每个case要么通过break/return等来终止，要么注释说明程序将继续执行到哪一个case<br>为止；在一个switch块内，都必须包含一个default语句并且放在最后，即使它什么代码也没有。<br></p>
-<hr>
-<h4 id="2-【强制】-5"><a href="#2-【强制】-5" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>在if/else/for/while/do语句中必须使用大括号，即使只有一行代码，避免使用下面的形式：if(condition)statements;<br></p>
-<blockquote>
-<p>注：<br><br>这是一个统一规范的问题，虽然说符合JAVA语法但是控制语句一定要有成对的“{}”。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-4"><a href="#3-【强制】-4" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>除常用方法（如getXxx/isXxx）等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。<br></p>
-<blockquote>
-<p>说明：<br><br>很多if语句内的逻辑相当复杂，阅读者需要分析条件表达式的最终结果，才能明确什么样的条件执行什么样的语句，那么，如果阅读者分析逻辑表达式错误呢？<br><br>正例：<br><br>//伪代码如下</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">boolean existed = (file.open(fileName, &quot;w&quot;) != null) &amp;&amp; (...) || (...);</span><br><span class="line">if (existed) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>反例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ((file.open(fileName, &quot;w&quot;) != null) &amp;&amp; (...) || (...)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注：<br><br>现有的很多判断逻辑都是一大堆，即使在开发环境下使用DEBUG也不宜读，这种方式会有一个落地值，方便定位问题。</p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】-4"><a href="#4-【强制】-4" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>循环体中的语句要考量性能，以下操作尽量移至循环体外处理，如定义对象、变量、获取数据库连接，进行不必要的try-catch操作（这个try-catch是否可以移至循环体外）。<br></p>
-<blockquote>
-<p>注：<br><br>所有人在开发时一定要考虑这个，或者在小组开发的过程中要统一定位try-catch的位置，不要随意抓捕，任何异常的信息都是有用的。</p>
-</blockquote>
-<hr>
-<h4 id="5-【强制】-4"><a href="#5-【强制】-4" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>接口入参保护，这种场景常见的是用于做批量操作的接口。<br></p>
-<blockquote>
-<p>注：<br><br><strong>接口入参保护指的是要对参数进行校验，大量批量操作非常消耗时间，所以一定要在接口这里做一个数量级和参数准确性的把控。具体的场景可以参照下面两个规则。</strong></p>
-</blockquote>
-<hr>
-<h4 id="6-【参考】"><a href="#6-【参考】" class="headerlink" title="6.【参考】"></a>6.【参考】</h4><p>方法中需要进行参数校验的场景：<br></p>
-<ul>
-<li>调用频次低的方法。</li>
-<li>执行时间开销很大的方法，参数校验时间几乎可以忽略不计，但如果因为参数错误导致中间执行回退，或者错误，那得不偿失。</li>
-<li>需要极高稳定性和可用性的方法。</li>
-<li>对外提供的开放接口，不管是RPC/API/HTTP口。</li>
-<li>敏感权限入口。</li>
-</ul>
-<hr>
-<h4 id="7-【参考】"><a href="#7-【参考】" class="headerlink" title="7.【参考】"></a>7.【参考】</h4><p>方法中不需要参数校验的场景：<br></p>
-<ul>
-<li>极有可能被循环调用的方法，不建议对参数进行校验。但在方法说明里必须注明外部参数检查。</li>
-<li>底层的方法调用频度都比较高，一般不校验。毕竟是像纯净水过滤的最后一道，参数错误不太可能到底层才会暴露问题。一般DAO层与Service层都在同一个应用中，部署在同一台服务器中，所以DAO的参数校验，可以省略。</li>
-<li>被声明成private只会被自己代码所调用的方法，如果能够确定调用方法的代码传入参数已经做过检查或者肯定不会有问题，此时可以不校验参数。</li>
-</ul>
-<hr>
-<h3 id="注释规约"><a href="#注释规约" class="headerlink" title="注释规约"></a>注释规约</h3><h4 id="1-【强制】-6"><a href="#1-【强制】-6" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>类、类属性、类方法的注释必须使用Javadoc规范，使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">内容</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-
-<p>格式，不得使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//xxx</span><br></pre></td></tr></table></figure>
-
-<p>方式。<br></p>
-<blockquote>
-<p>说明：<br><br>在IDE编辑窗口中，Javadoc方式会提示相关注释，生成Javadoc可以正确输出相应注释；在IDE中，工程调用方法时，不进入方法即可悬浮提示方法、参数、返回值的意义，提高阅读效率。</p>
-</blockquote>
-<hr>
-<h4 id="2-【强制】-6"><a href="#2-【强制】-6" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>所有的抽象方法（包括接口中的方法）必须要用Javadoc注释、除了返回值、参数、异常说明外，还必须指出该方法做什么事情，实现什么功能。<br></p>
-<blockquote>
-<p>说明：<br><br>对子类的实现要求，或者调用注意事项，请一并说明。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-5"><a href="#3-【强制】-5" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>所有的类都必须添加创建者信息。<br></p>
-<hr>
-<h4 id="4-【强制】-5"><a href="#4-【强制】-5" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>方法内部单行注释，在被注释语句上方另起一行。<br></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用//注释。方法内部多行注释</span><br><span class="line">使用/* */注释，注意与代码对齐。</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="5-【强制】-5"><a href="#5-【强制】-5" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>所有的枚举类型字段必须要有注释，说明每个数据项的用途。<br></p>
-<hr>
-<h4 id="6-【强制】-4"><a href="#6-【强制】-4" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p>与其“半吊子”英文来注释，不如用中文注释把问题说清楚。专有名词与关键字保持英文原文即可。<br></p>
-<blockquote>
-<p>反例：<br><br>“TCP连接超时”解释成“传输控制协议连接超时”，理解反而费脑筋。</p>
-</blockquote>
-<hr>
-<h4 id="7-【强制】-3"><a href="#7-【强制】-3" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>代码修改的同时，注释也要进行相应的修改，尤其是参数、返回值、异常、核心逻辑等的修改。<br></p>
-<blockquote>
-<p>说明：<br><br>代码与注释更新不同步，就像路网与导航软件更新不同步一样，如果导航软件严重滞后，就失去了导航的意义。</p>
-</blockquote>
-<hr>
-<h4 id="8-【强制】-3"><a href="#8-【强制】-3" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p>注释掉的代码尽量要配合说明，而不是简单的注释掉。<br></p>
-<blockquote>
-<p>说明：<br></p>
-<ul>
-<li>代码被注释掉有两种可能性：<ul>
-<li>后续会恢复此段代码逻辑。</li>
-<li>永久不用。前者如果没有备注信息，难以知晓注释动机。后者建议直接删掉（代码仓库保存了历史代码）。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<hr>
-<h4 id="9-【强制】-2"><a href="#9-【强制】-2" class="headerlink" title="9.【强制】"></a>9.【强制】</h4><ul>
-<li>对于注释的要求：<ul>
-<li>第一、能够准确反应设计思想和代码逻辑；</li>
-<li>第二、能够描述业务含义，使别的程序员能够迅速了解到代码背后的信息。完全没有注释的大段代码对于阅读者形同天书，注释是给自己看的，即使隔很长时间，也能清晰理解当时的思路；注释也是给继任者看的，使其能够快速接替自己的工作。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h4 id="10-【强制】-2"><a href="#10-【强制】-2" class="headerlink" title="10.【强制】"></a>10.【强制】</h4><p>好的命名、代码结构是自解释的，注释力求精简准确、表达到位。避免出现注释的一个极端：过多过滥的注释，代码的逻辑一旦修改，修改注释是相当大的负担。<br></p>
-<blockquote>
-<p>反例：<br><br>// put elephant into fridge <br><br>put(elephant, fridge);   <br><br>方法名put，加上两个有意义的变量名elephant和fridge，已经说明了这是在干什么，语义清晰的代码不需要额外的注释。</p>
-</blockquote>
-<hr>
-<h4 id="11-【强制】-1"><a href="#11-【强制】-1" class="headerlink" title="11.【强制】"></a>11.【强制】</h4><p><strong>特殊注释标记，请注明标记人与标记时间。注意及时处理这些标记，通过标记扫描，经常清理此类标记。线上故障有时候就是来源于这些标记处的代码。</strong><br></p>
-<ul>
-<li>待办事宜（TODO）:（标记人，标记时间，[预计处理时间]）表示需要实现，但目前还未实现的功能。这实际上是一个Javadoc的标签，目前的Javadoc还没有实现，但已经被广泛使用。只能应用于类，接口和方法（<br>因为它是一个Javadoc标签）。</li>
-<li>错误，不能工作（FIXME）:（标记人，标记时间，[预计处理时间]）在注释中用FIXME标记某代码是错误的，而且不能工作，需要及时纠正的情况。</li>
-</ul>
-<hr>
-<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><h4 id="1-【强制】-7"><a href="#1-【强制】-7" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>在使用正则表达式时，利用好其预编译功能，可以有效加快正则匹配速度。<br></p>
-<blockquote>
-<p>说明：<br><br>不要在方法体内定义：<br>Pattern pattern = Pattern.compile(规则);<br><br>注：<br><br><a href="http://blog.csdn.net/rubenyu/article/details/6591767" target="_blank" rel="noopener">参考1</a><br><br><a href="http://www.cnblogs.com/sparkbj/articles/6207103.html" target="_blank" rel="noopener">参考2</a></p>
-</blockquote>
-<hr>
-<h4 id="2-【强制】-7"><a href="#2-【强制】-7" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注意Math.random()这个方法返回是double类型，注意取值的范围0≤x&lt;1（能够取到零值，注意除零异常），</span><br><span class="line">如果想获取整数类型的随机数，不要将x放大10的若干倍然后取整，直接使用Random对象的nextInt或者nextLong方法。</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="3-【强制】-6"><a href="#3-【强制】-6" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>获取当前毫秒数System.currentTimeMillis();而不是new Date().getTime();<br></p>
-<blockquote>
-<p>说明：<br><br>如果想获取更加精确的纳秒级时间值，用System.nanoTime()。在JDK8中，针对统计时间等场景，推荐使用Instant类。</p>
-</blockquote>
-<hr>
-<h4 id="4-【推荐】-1"><a href="#4-【推荐】-1" class="headerlink" title="4.【推荐】"></a>4.【推荐】</h4><p>任何数据结构的构造或初始化，都应指定大小，避免数据结构无限增长吃光内存。<br></p>
-<blockquote>
-<p>注：<br><br>仅做参考，因现有系统业务的复杂性，如果需要实现这一点（降低内存的使用率）再做考虑。</p>
-</blockquote>
-<hr>
-<h4 id="5-【强制】-6"><a href="#5-【强制】-6" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>对于“明确停止使用的代码和配置”，如方法、变量、类、配置文件、动态配置属性等要坚决从程序中清理出去，避免造成过多垃圾。<br></p>
-<blockquote>
-<p>注：<br>在以后使用GIT后，分支的管理会“重”起来，且无用的文件或片段可通过版本控制回溯，在保证业务逻辑的前提下不要保留“垃圾”。</p>
-</blockquote>
-<hr>
-<h2 id="异常日志"><a href="#异常日志" class="headerlink" title="异常日志"></a>异常日志</h2><h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><h4 id="1-【强制】-8"><a href="#1-【强制】-8" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>不要捕获Java类库中定义的继承自RuntimeException的运行时异常类，如：IndexOutOfBoundsException/ NullPointerException，这类异常由程序员预检查来规避，保证程序健壮性。<br></p>
-<blockquote>
-<p>正例：<br><br>if(obj != null) {…}<br><br>反例：<br><br>try { obj.method() } catch(NullPointerException e){<br>…<br>}</p>
-</blockquote>
-<hr>
-<h4 id="2-【强制】-8"><a href="#2-【强制】-8" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>对大段代码进行try-catch，这是不负责任的表现。catch时请分清稳定代码和非稳定代码，稳定代码指的是无论如何不会出错的代码。对于非稳定代码的catch尽可能进行区分异常类型，再做对应的异常处理。<br></p>
-<blockquote>
-<p>注：<br><br>这个在现有系统中是存在的，为了方便处理，后面每个业务系统开发小组自行决定一个统一（公用）的异常抓捕位置，这样既实现了这个规则也在一定情况下让代码变得整洁有序。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-7"><a href="#3-【强制】-7" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>捕获异常是为了处理它，不要捕获了却什么都不处理而抛弃之，如果不想处理它，请将该异常抛给它的调用者。最外层的业务使用者，必须处理异常，将其转化为用户可以理解的内容。<br></p>
-<blockquote>
-<p>注：<br><br>这个在之前有提到过，任何异常信息都是有用的，不要随意进行一个抓捕，要配合上面的规则统一化管理。<br><br>@see：控制语句#第五点</p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】-6"><a href="#4-【强制】-6" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>有try块放到了事务代码中，catch异常后，如果需要回滚事务，一定要注意手动回滚事务。<br></p>
-<hr>
-<h4 id="5-【强制】-7"><a href="#5-【强制】-7" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>finally块必须对资源对象、流对象进行关闭，有异常也要做try-catch。<br></p>
-<blockquote>
-<p>说明：<br><br>如果JDK7，可以使用try-with-resources方式。</p>
-</blockquote>
-<hr>
-<h4 id="6-【强制】-5"><a href="#6-【强制】-5" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p>不能在finally块中使用return，finally块中的return返回后方法结束执行，不会再执行try块中的return语句。<br></p>
-<hr>
-<h4 id="7-【强制】-4"><a href="#7-【强制】-4" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>捕获异常与抛异常，必须是完全匹配，或者捕获异常是抛异常的父类。<br></p>
-<blockquote>
-<p>说明：<br><br>如果预期对方抛的是绣球，实际接到的是铅球，就会产生意外情况。<br><br>注：<br><br>这个在TA的设计中有考虑，所有开发人员要考虑异常抓捕的范围，由小到大，最后有一个Exception最大的。</p>
-</blockquote>
-<hr>
-<h4 id="8-【强制】-4"><a href="#8-【强制】-4" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p>方法的返回值可以为null，不强制返回空集合，或者空对象等，必须添加注释充分说明什么情况下会返回null值。调用方需要进行null判断防止NPE问题。<br></p>
-<blockquote>
-<p>说明：<br><br>本规约明确防止NPE是调用者的责任。即使被调用方法返回空集合或者空对象，对调用者来说，也并非高枕无忧，必须考虑到远程调用失败，运行时异常等场景返回null的情况。<br><br>注：<br><br>这个在以后的开发过程中会经常遇到，之前看QF实现代码的时候就发现这个问题了，应该是刘泽坤那面写的，之前没有一个肯定的答复，现在参照这个规则实现，在注释上进行充分说明。</p>
-</blockquote>
-<hr>
-<h4 id="9-【推荐】"><a href="#9-【推荐】" class="headerlink" title="9.【推荐】"></a>9.【推荐】</h4><p>防止NPE，是程序员的基本修养，注意NPE产生的场景：</p>
-<ul>
-<li>返回类型为包装数据类型，有可能是null，返回int值时注意判空。</li>
-</ul>
-<blockquote>
-<p>反例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public int f()&#123; </span><br><span class="line">    return Integer 对象</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果为null，自动解箱抛NPE。</p>
-</blockquote>
-<ul>
-<li>数据库的查询结果可能为null。</li>
-<li>集合里的元素即使isNotEmpty，取出的数据元素也可能为null。</li>
-<li>远程调用返回对象，一律要求进行NPE判断。</li>
-<li>对于Session中获取的数据，建议NPE检查，避免空指针。</li>
-<li>级联调用obj.getA().getB().getC()；一连串调用，易产生NPE。</li>
-</ul>
-<blockquote>
-<p>注：<br><br><strong>这个要结合上一个规则来看，我在这做一个整理（可以讨论一下），接口（方法）提供方无需考虑是否返回的是NULL值，接口（方法）调用方必须要考虑接口（方法）返回值为空的情况（这个在提供方的注释或API上要有详细的说明，在什么情况下会有NULL返回，餐勺上面的规则）。</strong></p>
-</blockquote>
-<hr>
-<h4 id="10-【强制】-3"><a href="#10-【强制】-3" class="headerlink" title="10.【强制】"></a>10.【强制】</h4><p>在代码中使用“抛异常”还是“返回错误码”，对于公司外的http/api开放接口必须使用“错误码”；而应用内部推荐异常抛出；跨应用间RPC调用优先考虑<br>使用Result方式，封装isSuccess、“错误码”、“错误简短信息”。<br></p>
-<blockquote>
-<p>说明：<br><br>关于RPC方法返回方式使用Result方式的理由：</p>
-<ul>
-<li>使用抛异常返回方式，调用方如果没有捕获到就会产生运行时错误。</li>
-<li>如果不加栈信息，只是new自定义异常，加入自己的理解的errormessage，对于调用端解决问题的帮助不会太多。如果加了栈信息，在频繁调用出错的情况下，数据序列化和传输的性能损耗也是问题。</li>
-</ul>
-</blockquote>
-<blockquote>
-<p><strong>注：<br><br>错误代码的规范也要统一起来并形成错误代码表，作为日志跟踪、问题排查、系统交互等后期工作的前置条件，之后这个丰富起来才能说明系统的健壮性。<br><br>系统的健壮性不是实现了多少功能，也不是多么的牛，而是你可控的范围有多少，错误代码表就是系统健壮性的一个量级或文档化的实现。</strong></p>
-</blockquote>
-<hr>
-<h4 id="11-【强制】-2"><a href="#11-【强制】-2" class="headerlink" title="11.【强制】"></a>11.【强制】</h4><p>定义时区分unchecked/ checked异常，避免直接使用RuntimeException抛出，更不允许抛出Exception或者Throwable，应使用有业务含义的自定义异常。推荐业界已定义过的<br>自定义异常，如：DAOException/ ServiceException等。<br></p>
-<hr>
-<h4 id="12-【参考】"><a href="#12-【参考】" class="headerlink" title="12.【参考】"></a>12.【参考】</h4><p>避免出现重复的代码（Don’t Repeat Yourself），即DRY原则。<br></p>
-<blockquote>
-<p>说明：<br><br>随意复制和粘贴代码，必然会导致代码的重复，在以后需要修改时，需要修改所有的副本，容易遗漏。必要时抽取共性方法，或者抽象公共类，甚至是共用模块。<br><br>正例：<br><br>一个类中有多个public方法，都需要进行数行相同的参数校验操作，这个时候请抽取：<br><br>private boolean checkParam(DTO dto){…} </p>
-</blockquote>
-<blockquote>
-<p><strong>注：<br><br>这个作为参考保留，是以后的一个方向，因为现有业务逻辑的原因，不能也没有时间进行细化，所以业务层面的代码还是要有冗余的，但是作为工具层面的代码一定要考虑这个DRY原则。</strong></p>
-</blockquote>
-<hr>
-<h2 id="MySQL规约"><a href="#MySQL规约" class="headerlink" title="MySQL规约"></a>MySQL规约</h2><h3 id="建表规约"><a href="#建表规约" class="headerlink" title="建表规约"></a>建表规约</h3><h4 id="1-【强制】-9"><a href="#1-【强制】-9" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>表达是与否概念的字段，必须使用is_xxx的方式命名，数据类型是unsigned tinyint（1表示是，0表示否），此规则同样适用于odps建表。<br></p>
-<blockquote>
-<p>说明：<br><br>任何字段如果为非负数，必须是unsigned。</p>
-</blockquote>
-<hr>
-<h4 id="2-【强制】-9"><a href="#2-【强制】-9" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>表名、字段名必须使用小写字母或数字；禁止出现数字开头，禁止两个下划线中间只出现数字。数据库字段名的修改代价很大，因为无法进行预发布，所以字段名称需要慎重考虑。<br></p>
-<blockquote>
-<p>正例：<br><br>getter_admin，task_config，level3_name<br><br>反例：<br><br>GetterAdmin，taskConfig，level_3_name</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-8"><a href="#3-【强制】-8" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>表名不使用复数名词。<br></p>
-<blockquote>
-<p>说明：<br><br>表名应该仅仅表示表里面的实体内容，不应该表示实体数量，对应于DO类名也是单数形式，符合表达习惯。<br></p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】-7"><a href="#4-【强制】-7" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>禁用保留字，如desc、range、match、delayed等，请参考MySQL官方保留字。<br></p>
-<hr>
-<h4 id="5-【强制】-8"><a href="#5-【强制】-8" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>唯一索引名为uk_字段名；普通索引名则为idx_字段名。<br></p>
-<blockquote>
-<p>说明：<br><br>uk_ 即uniquekey；idx_ 即index的简称。</p>
-</blockquote>
-<hr>
-<h4 id="6-【强制】-6"><a href="#6-【强制】-6" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p>小数类型为decimal，禁止使用float和double。<br></p>
-<blockquote>
-<p>说明：<br><br>float和double在存储的时候，存在精度损失的问题，很可能在值的比较时，得到不正确的结果。如果存储的数据范围超过decimal的范围，建议将数据拆成整数和小数分开存储。</p>
-</blockquote>
-<hr>
-<h4 id="7-【强制】-5"><a href="#7-【强制】-5" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>如果存储的字符串长度几乎相等，使用char定长字符串类型。<br></p>
-<hr>
-<h4 id="8-【强制】-5"><a href="#8-【强制】-5" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p>varchar是可变长字符串，不预先分配存储空间，长度不要超过5000，如果存储长度大于此值，定义字段类型为text，独立出来一张表，用主键来对应，避免影响其它字段索引效率。<br></p>
-<hr>
-<h4 id="9-【强制】-3"><a href="#9-【强制】-3" class="headerlink" title="9.【强制】"></a>9.【强制】</h4><p>表必备三字段：id, gmt_create, gmt_modified。<br></p>
-<blockquote>
-<p>说明：<br><br>其中id必为主键，类型为unsigned bigint、单表时自增、步长为1。gmt_<br>create, gmt_modified的类型均为date_time类型。</p>
-</blockquote>
-<blockquote>
-<p>注：<br><br><strong>这个规则需要详细讨论，就参照现有sofa那面的内容</strong></p>
-</blockquote>
-<hr>
-<h4 id="10-【强制】-4"><a href="#10-【强制】-4" class="headerlink" title="10.【强制】"></a>10.【强制】</h4><p>表的命名最好是加上“业务名称_表的作用”。<br></p>
-<blockquote>
-<p>正例：<br><br>tiger_task/ tiger_reader/ mpp_config</p>
-</blockquote>
-<hr>
-<h4 id="11-【强制】-3"><a href="#11-【强制】-3" class="headerlink" title="11.【强制】"></a>11.【强制】</h4><p>库名与应用名称尽量一致。<br></p>
-<hr>
-<h4 id="12-【强制】-2"><a href="#12-【强制】-2" class="headerlink" title="12.【强制】"></a>12.【强制】</h4><p>如果修改字段含义或对字段表示的状态追加时，需要及时更新字段注释。<br></p>
-<hr>
-<h4 id="13-【推荐】-1"><a href="#13-【推荐】-1" class="headerlink" title="13.【推荐】"></a>13.【推荐】</h4><p>字段允许适当冗余，以提高性能，但是<strong>必须考虑数据同步的情况</strong>。冗余字段应遵循：<br></p>
-<ul>
-<li>不是频繁修改的字段。</li>
-<li>不是varchar超长字段，更不能是text字段。</li>
-</ul>
-<blockquote>
-<p>正例：<br><br><strong>商品类目名称使用频率高，字段长度短，名称基本一成不变，可在相关联的表中冗余存储类目名称，避免关联查询。</strong></p>
-</blockquote>
-<hr>
-<h4 id="14-【推荐】-1"><a href="#14-【推荐】-1" class="headerlink" title="14.【推荐】"></a>14.【推荐】</h4><p>单表行数超过500万行或者单表容量超过2GB，才推荐进行分库分表。<br></p>
-<blockquote>
-<p>说明：<br><br>如果预计三年后的数据量根本达不到这个级别，请不要在创建表时就分库分表。</p>
-</blockquote>
-<hr>
-<h4 id="15-【参考】"><a href="#15-【参考】" class="headerlink" title="15.【参考】"></a>15.【参考】</h4><p>合适的字符存储长度，不但节约数据库表空间、节约索引存储，更重要的是提升检索速度。<br></p>
-<blockquote>
-<p>正例：<br><br>人的年龄用unsigned tinyint（表示范围0-255，人的寿命不会超过255岁<br>）；海龟就必须是smallint，但如果是太阳的年龄，就必须是int；如果是所有恒星的年龄都加起来，那么就必须使用bigint。</p>
-</blockquote>
-<hr>
-<h3 id="索引规约"><a href="#索引规约" class="headerlink" title="索引规约"></a>索引规约</h3><h4 id="1-【强制】-10"><a href="#1-【强制】-10" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>业务上具有唯一特性的字段，即使是组合字段，也必须建成唯一索引。<br></p>
-<blockquote>
-<p>说明：<br><br>不要以为唯一索引影响了insert速度，这个速度损耗可以忽略，但提高查找速度是明显的；另外，即使在应用层做了非常完善的校验和控制，只要没有唯一索引，根据墨菲定律，必然有脏数据产生。</p>
-</blockquote>
-<hr>
-<h4 id="2-【强制】-10"><a href="#2-【强制】-10" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>在varchar字段上建立索引时，必须指定索引长度，没必要对全字段建立索引，根据实际文本区分度决定索引长度。<br></p>
-<blockquote>
-<p>说明：<br><br>索引的长度与区分度是一对矛盾体，一般对字符串类型数据，长度为20的索引，区分度会高达90%以上，可以使用count(distinct left(列名, 索引长度))/count(*)的区分度来确定。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-9"><a href="#3-【强制】-9" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p><strong>页面搜索严禁左模糊或者全模糊，如果需要请走搜索引擎来解决。</strong><br></p>
-<blockquote>
-<p>说明：<br><br>索引文件具有B-Tree的最左前缀匹配特性，如果左边的值未确定，那么无法使用此索引。</p>
-</blockquote>
-<blockquote>
-<p>注：<br><br>++<strong>这个规则建议不进作为开发及数据库设计规则，也要作为需求产品设计规则，而且现有需求即使只支持右模糊也无任何影响。</strong>++</p>
-</blockquote>
-<hr>
-<h3 id="SQL规约"><a href="#SQL规约" class="headerlink" title="SQL规约"></a>SQL规约</h3><h4 id="1-【强制】-11"><a href="#1-【强制】-11" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><html>
-不要使用count(列名)或count(常量)来替代count(*)，count(*)就是SQL92定义的标准统计行数的语法，跟数据库无关，跟NULL和非NULL无关。<br>
-
-<blockquote>
-<p>说明：<br><br>count(*)会统计值为NULL的行，而count(列名)不会统计此列为NULL值的行。</p>
-</blockquote>
-</html>
-
-<hr>
-<h4 id="2-【强制】-11"><a href="#2-【强制】-11" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>count(distinct col)计算该列除NULL之外的不重复数量。<strong>注意count(distinct col1, col2)如果其中一列全为NULL，那么即使另一列有不同的值，也返回为0。</strong><br></p>
-<hr>
-<h4 id="3-【强制】-10"><a href="#3-【强制】-10" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>当某一列的值全是NULL时，count(col)的返回结果为0，但sum(col)的返回结果为NULL，因此使用sum()时需注意NPE问题。<br></p>
-<blockquote>
-<p>正例：<br><br>可以使用如下方式来避免sum的NPE问题：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT IF(ISNULL(SUM(g)),0,SUM(g)) FROM table;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="4-【强制】-8"><a href="#4-【强制】-8" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>使用ISNULL()来判断是否为NULL值。注意：NULL与任何值的直接比较都为NULL。<br></p>
-<blockquote>
-<p>说明：<br></p>
-<ul>
-<li>NULL&lt;&gt;NULL的返回结果是NULL，而不是false。</li>
-<li>NULL=NULL的返回结果是NULL，而不是true。</li>
-<li>NULL&lt;&gt;1的返回结果是NULL，而不是true。</li>
-</ul>
-</blockquote>
-<hr>
-<h4 id="5-【强制】-9"><a href="#5-【强制】-9" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>在代码中写分页查询逻辑时，若count为0应直接返回，避免执行后面的分页语句。<br></p>
-<hr>
-<h4 id="6-【强制】-7"><a href="#6-【强制】-7" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p><strong>不得使用外键与级联，一切外键概念必须在应用层解决。</strong><br></p>
-<blockquote>
-<p>说明：<br><br>（概念解释）学生表中的student_id是主键，那么成绩表中的student_id则为外键。如果更新学生表中的student_id，同时触发成绩表中的student_id更新，则为级联更新。外键与级联更新适用于单机低并发，不适合分布式、高并发集群；级联更新是强阻塞，存在数据库更新风暴的风险；外键影响数据库的插入速度。</p>
-</blockquote>
-<hr>
-<h4 id="7-【强制】-6"><a href="#7-【强制】-6" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>禁止使用存储过程，存储过程难以调试和扩展，更没有移植性。<br></p>
-<blockquote>
-<p>注：<br><br>这个后面做详细的考量，如果时间要求，那也没有办法。</p>
-</blockquote>
-<hr>
-<h4 id="8-【强制】-6"><a href="#8-【强制】-6" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p>数据订正时，删除和修改记录时，要先select，避免出现误删除，确认无误才能执行更新语句。<br></p>
-<hr>
-<h4 id="9-【强制】-4"><a href="#9-【强制】-4" class="headerlink" title="9.【强制】"></a>9.【强制】</h4><p>in操作能避免则避免，若实在避免不了，需要仔细评估in后边的集合元素数量，控制在1000个之内。<br></p>
-<hr>
-<h4 id="10-【强制】-5"><a href="#10-【强制】-5" class="headerlink" title="10.【强制】"></a>10.【强制】</h4><p>如果有全球化需要，所有的字符存储与表示，均以utf-8编码，那么字符计数方法注意：<br></p>
-<blockquote>
-<p>说明：<br></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT LENGTH(&quot;轻松工作&quot;)；返回为12</span><br><span class="line">SELECT CHARACTER_LENGTH(&quot;轻松工作&quot;)；返回为4</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果要使用表情，那么使用utfmb4来进行存储，注意它与utf-8编码的区别。<br></p>
-</blockquote>
-<blockquote>
-<p>注：<br><br>以后如无特殊要求，统一使用utf-8编码。</p>
-</blockquote>
-<hr>
-<h4 id="11-【强制】-4"><a href="#11-【强制】-4" class="headerlink" title="11.【强制】"></a>11.【强制】</h4><p>TRUNCATE TABLE比DELETE速度快，且使用的系统和事务日志资源少，但TRUNCATE无事务且不触发trigger，有可能造成事故，故不建议在开发代码中使用此语句。<br></p>
-<blockquote>
-<p>说明：<br><br>TRUNCATE TABLE在功能上与不带WHERE子句的DELETE语句相同。</p>
-</blockquote>
-<hr>
-<h3 id="ORM规约"><a href="#ORM规约" class="headerlink" title="ORM规约"></a>ORM规约</h3><h4 id="1-【强制】-12"><a href="#1-【强制】-12" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>在表查询中，一律不要使用* 作为查询的字段列表，需要哪些字段必须明确写明。<br></p>
-<blockquote>
-<p>说明：<br></p>
-<ul>
-<li>增加查询分析器解析成本。</li>
-<li>增减字段容易与resultMap配置不一致。</li>
-</ul>
-</blockquote>
-<hr>
-<h4 id="2-【强制】-12"><a href="#2-【强制】-12" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>POJO类的boolean属性不能加is，而数据库字段必须加is_，要求在resultMap中进行字段与属性之间的映射。<br></p>
-<blockquote>
-<p>说明：<br><br>参见定义POJO类以及数据库字段定义规定，在sql.xml增加映射，是必须的。</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-11"><a href="#3-【强制】-11" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>不要用resultClass当返回参数，即使所有类属性名与数据库字段一一对应，也需要定义；反过来，每一个表也必然有一个与之对应。<br></p>
-<blockquote>
-<p>说明：<br><br>配置映射关系，使字段与DO类解耦，方便维护。</p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】-9"><a href="#4-【强制】-9" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>xml配置中参数注意使用：#{}，#param# 不要使用${} 此种方式容易出现SQL注入。<br></p>
-<hr>
-<h4 id="5-【强制】-10"><a href="#5-【强制】-10" class="headerlink" title="5.【强制】"></a>5.【强制】</h4><p>iBATIS自带的queryForList(String statementName,int start,int size)不推荐使用。<br></p>
-<blockquote>
-<p>说明：<br><br>其实现方式是在数据库取到statementName对应的SQL语句的所有记录，再通过subList取start,size的子集合，线上因为这个原因曾经出现过OOM。<br><br>正例：<br><br>在sqlmap.xml中引入#start#, #size#<br><br>Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();<br><br>map.put(“start”, start);<br><br>map.put(“size”, size);  </p>
-</blockquote>
-<blockquote>
-<p>注：<br><br><strong>这个平台那面研究一下是否现在使用的mybatis版本也是这样，后面提供封装方法的时候要注意。</strong></p>
-</blockquote>
-<hr>
-<h4 id="6-【强制】-8"><a href="#6-【强制】-8" class="headerlink" title="6.【强制】"></a>6.【强制】</h4><p>更新数据表记录时，必须同时更新记录对应的gmt_modified字段值为当前时间。<br></p>
-<hr>
-<h4 id="7-【强制】-7"><a href="#7-【强制】-7" class="headerlink" title="7.【强制】"></a>7.【强制】</h4><p>不要写一个大而全的数据更新接口，传入为POJO类，不管是不是自己的目标更新字段，都进行update table set c1=value1,c2=value2,c3=value3; 这是不对的。<br><br>执行SQL时，尽量不要更新无改动的字段<br><br>一是易出错；<br><br>二是效率低；<br><br>三是binlog增加存储。</p>
-<hr>
-<h4 id="8-【强制】-7"><a href="#8-【强制】-7" class="headerlink" title="8.【强制】"></a>8.【强制】</h4><p>@Transactional事务不要滥用。事务会影响数据库的QPS，另外使用事务的地方需要考虑各方面的回滚方案，包括缓存回滚、搜索引擎回滚、消息补偿、统计修正等。<br></p>
-<hr>
-<h2 id="工程规约"><a href="#工程规约" class="headerlink" title="工程规约"></a>工程规约</h2><h3 id="二方库规约"><a href="#二方库规约" class="headerlink" title="二方库规约"></a>二方库规约</h3><h4 id="1-【强制】-13"><a href="#1-【强制】-13" class="headerlink" title="1.【强制】"></a>1.【强制】</h4><p>定义GAV遵从以下规则：<br></p>
-<ul>
-<li>GroupID格式：com.{公司/BU}.业务线.[子业务线]，最多4级。</li>
-</ul>
-<blockquote>
-<p>说明：{公司/BU} 例如：alibaba/taobao/tmall/aliexpress等BU一级；子业务线可选。<br><br>正例：<br><br>com.taobao.jstorm或com.alibaba.dubbo.register</p>
-</blockquote>
-<ul>
-<li>ArtifactID格式：产品线名-模块名。语义不重复不遗漏，先到仓库中心去查证一下。</li>
-</ul>
-<blockquote>
-<p>正例：<br><br>dubbo-client/ fastjson-api/ jstorm-tool</p>
-</blockquote>
-<ul>
-<li>Version：详细规定参考下方。</li>
-</ul>
-<hr>
-<h4 id="2-【强制】-13"><a href="#2-【强制】-13" class="headerlink" title="2.【强制】"></a>2.【强制】</h4><p>二方库版本号命名方式：主版本号.次版本号.修订号<br></p>
-<ul>
-<li>主版本号：当做了不兼容的API修改，或者增加了能改变产品方向的新功能。</li>
-<li>次版本号：当做了向下兼容的功能性新增（新增类、接口等）。</li>
-<li>修订号：修复bug，没有修改方法签名的功能加强，保持API兼容性。</li>
-</ul>
-<blockquote>
-<p>说明：<br><br>起始版本号必须为：1.0.0，而不是0.0.1</p>
-</blockquote>
-<hr>
-<h4 id="3-【强制】-12"><a href="#3-【强制】-12" class="headerlink" title="3.【强制】"></a>3.【强制】</h4><p>依赖于一个二方库群时，必须定义一个统一版本变量，避免版本号不一致。<br></p>
-<blockquote>
-<p>说明：<br><br>依赖springframework-core,-context,-beans，它们都是同一个版本，可以定义一个变量来保存版本：${spring.version}，定义依赖的时候，引用该版本。</p>
-</blockquote>
-<hr>
-<h4 id="4-【强制】-10"><a href="#4-【强制】-10" class="headerlink" title="4.【强制】"></a>4.【强制】</h4><p>禁止在子项目的pom依赖中出现相同的GroupId，相同的ArtifactId，但是不同的Version。<br></p>
-<blockquote>
-<p>说明：<br><br>在本地调试时会使用各子项目指定的版本号，但是合并成一个war，只能有一个版本号出现在最后的lib目录中。曾经出现过线下调试是正确的，发布到线上出故障的先例。</p>
-</blockquote>
-<hr>
-<h4 id="5-【参考】"><a href="#5-【参考】" class="headerlink" title="5.【参考】"></a>5.【参考】</h4><p>为避免应用二方库的依赖冲突问题，二方库发布者应当遵循以下原则：<br></p>
-<ul>
-<li>精简可控原则。移除一切不必要的API和依赖，只包含ServiceAPI、必要的领域模型对象、Utils类、常量、枚举等。如果依赖其它二方库，尽量是provided引入，让二方库使用者去依赖具体版本号；无log具体实现，只依赖日志框架。</li>
-<li>稳定可追溯原则。每个版本的变化应该被记录，二方库由谁维护，源码在哪里，都需要能方便查到。除非用户主动升级版本，否则公共二方库的行为不应该发生变化。</li>
-</ul>
-<hr>
-
+说明：
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/27/开发规范/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1712,21 +923,19 @@ try{
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+            <p>
+              Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/23/hello-world/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
